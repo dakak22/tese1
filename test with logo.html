@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title></title>
+  
+
+  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+  <script src="https://unpkg.com/video.js/dist/video.js"></script>
+  <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+  <style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+    .video-js .vjs-big-play-button {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .container {
+      position: relative;
+    }
+
+    .title-container {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .title-container h4 {
+      color: #fff;
+      font-family: 'Kantumruy Pro', sans-serif;
+      padding: 7px 15px;
+      font-size: 20px;
+    }
+
+
+  </style>
+   
+</head>
+<body>
+  <div class="container">
+    <!-- Video -->
+    <video id="my_video_1" class="video-js vjs-fluid vjs-default-skin" controls preload="auto" data-setup='{}' poster=="#"?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+      <source src="https://raw.githubusercontent.com/dakak22/tese1/master/movie.m3u8" type="application/x-mpegURL">
+      <track label="Khmer" kind="subtitles" srclang="km" src="#" default>
+      <track label="English" kind="subtitles" srclang="en" src="#">
+    </video>
+
+    <!-- Title -->
+    <div class="title-container">
+      <h4></h4>
+    </div>
+  </div>
+  
+<script>
+    var title = document.querySelector('.title-container h4');
+    if(window.outerWidth < 585) {
+      title.style.fontSize = '12px';
+    }
+
+    if (window.outerWidth < 485) {
+      title.style.fontSize = '10px';
+    }
+
+    if (window.outerWidth < 385) {
+      title.style.fontSize = '8px';
+    }
+
+  var player = videojs('my_video_1', {autoplay: 'any'});
+  player.play();
+</script>
+
+<script type='text/javascript'>
+  const homePageUrl = "<data:blog.homepageUrl/>";
+  const getBlogPostImage = () => {
+      let hasImage = {
+          isTrue: "<b:if cond='data:view.featuredImage'>true</b:if>",
+          isUrl: "<data:view.featuredImage/>"
+      }
+      if (hasImage.isTrue === "true") {
+          return hasImage.isUrl;
+      }
+  }
+  </script>
+  <script type='text/javascript'>
+  //<![CDATA[
+  const vidElem = document.querySelector('#jw-player');
+  const vidJw = jwplayer('jw-player');
+  const movieElem = document.querySelector('#movie');
+  const movieJw = jwplayer('movie');
+  const logoImage = `https://blogger.googleusercontent.com/img/a/AVvXsEjoDtRtGsc8n_Gc_GqwcOj5yotRcAItox-brQEYuaul5zdipv9vTu3iWhp4j20W9AXCns76y4rbKNFYFtvM09_weeKAmsTGc4Xmgk3aqVnpXW8BOjgFP_zj3W69Q-JhNbdARkGSwVSY76UsYWxl_nDrhjAaH8TYsaRcyhvfZvlSXDjiUyULvkcWpfLI=s1341`;
+  const createCustomLogo = () => {
+      let logo = {
+          file: logoImage,
+          hide: false,
+          margin: "20",
+          position: "top-left",
+          link: homePageUrl
+      }
+      return logo;
+  }
+  const loadJwPlayer = () => {
+      try {
+          if (vidElem) {
+              vidJw.setup({
+                  file: file.src,
+                  logo: createCustomLogo(),
+                  image: getBlogPostImage()
+              })
+          } else if (movieElem) {
+              movieJw.setup({
+                  logo: createCustomLogo(),
+                  captions: {
+                      fontSize: 14,
+                      backgroundOpacity: 0,
+                      edgeStyle: "raised"
+                  },
+                  playlist: [{
+                      image: getBlogPostImage(),
+                      file: movie.src,
+                      captions: [{
+                              label: movie.subtitles[0].lang,
+                              file: movie.subtitles[0].src,
+                              default: true
+                          },
+                          {
+                              label: movie.subtitles[1].lang,
+                              file: movie.subtitles[1].src
+                          }
+                      ]
+                  }]
+              })
+          }
+      } catch (e) {
+          console.log(`Error! ការកំណត់របស់អ្នកមិនត្រឹមត្រូវទេ។`)
+      }
+  };
+  window.addEventListener('DOMContentLoaded', loadJwPlayer);
+  //]]>
+  </script>
+  
+</body>
+</html>
